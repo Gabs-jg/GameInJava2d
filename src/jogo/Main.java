@@ -17,8 +17,8 @@ public class Main {
             plano.draw(); // Desenha o plano de fundo (menu)
             janela.update(); // Atualiza a janela
 
-            if(teclado.keyDown(Keyboard.ENTER_KEY)) {
-                JOptionPane.showMessageDialog(null, "Funcuionado");
+            if(teclado.keyDown(Keyboard.ENTER_KEY)) { // Se a tecla enter for pressionada ir para outro cenário.
+                new Cenario1(janela);
             }
         }
     }
