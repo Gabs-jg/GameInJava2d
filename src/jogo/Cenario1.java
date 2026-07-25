@@ -38,6 +38,8 @@ public class Cenario1 {
             jogador.x += cenario.getXOffset();
             jogador.y += cenario.getYOffset();
 
+            jogador.atirar(janela, cenario, teclado);
+
             zumbi.x += cenario.getXOffset();
             zumbi.y += cenario.getYOffset();
 

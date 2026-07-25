@@ -4,6 +4,7 @@ import jplay.*;
 import jplay.Window;
 
 import java.awt.*;
+import java.awt.event.KeyEvent;
 
 public class Jogador extends Ator {
 
@@ -14,6 +15,15 @@ public class Jogador extends Ator {
         this.x = x;
         this.y = y;
         this.setTotalDuration(2000); // Troca de frames na tela
+    }
+
+    ControleTiros tiros = new ControleTiros();
+
+    public void atirar(Window janela, Scene cena, Keyboard teclado) {
+        if(teclado.keyDown(KeyEvent.VK_A)) {
+            tiros.adicionaTiro(x + 2, y + 10, direcao, cena);
+        }
+        tiros.run();
     }
 
     public void controle(Window janela, Keyboard teclado) {
