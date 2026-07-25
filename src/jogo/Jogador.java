@@ -1,15 +1,15 @@
 package jogo;
 
-import jplay.Keyboard;
-import jplay.Sprite;
-import jplay.URL;
+import jplay.*;
 import jplay.Window;
+
+import java.awt.*;
+import java.util.Vector;
 
 public class Jogador extends Sprite {
 
-    private double velocidade = 0.04;
+    private double velocidade = 1;
     private int direcao = 3;
-    private Keyboard teclado;
     private boolean movendo = false;
 
     public Jogador(int x, int y) {
@@ -19,11 +19,7 @@ public class Jogador extends Sprite {
         this.setTotalDuration(2000); // Troca de frames na tela
     }
 
-    public void mover(Window janela) {
-        if(teclado==null) {
-            teclado = janela.getKeyboard();
-        }
-
+    public void controle(Window janela, Keyboard teclado) {
         if(teclado.keyDown(Keyboard.LEFT_KEY)) {
             if(this.x > 0) {
                 this.x -= velocidade;
@@ -72,5 +68,61 @@ public class Jogador extends Sprite {
             update();
             movendo = false;
         }
+    }
+
+    Controle controle = new Controle();
+
+    // Controle dos bloqueios do cenário
+    public void caminho(Scene cena) {
+        Point min = new Point((int)this.x, (int)this.y);
+        Point max = new Point((int)this.x + this.width, (int)this.y + this.height);
+
+        Vector<?> tiles = cena.getTilesFromPosition(min, max);
+
+        for (int i = 0; i < tiles.size(); i++) {
+            TileInfo tile = (TileInfo)tiles.elementAt(i);
+
+            if(controle.colisao(this, tile)) {
+                if(colisaoVertical(this, tile)) {
+
+                    if (tile.y + tile.height - 1.5 < this.y) {
+                        this.y = tile.y + this.height;
+                    }
+
+                    if (tile.y > this.y + this.height - 1.5) {
+                        this.y = tile.y - this.height;
+                    }
+                }
+
+                if(colisaoHorizontal(this, tile)) {
+                    if(tile.x > this.x + this.width - 1.5) {
+                        this.x = tile.x - this.width;
+                    } else {
+                        this.x = tile.x + tile.width;
+                    }
+
+                }
+            }
+        }
+    }
+
+    private boolean colisaoVertical(GameObject obj, GameObject obj2) {
+        if(obj2.x + obj2.width <= obj.x){
+            return false;
+        }
+        if(obj.x + obj.width <= obj2.x) {
+            return false;
+        }
+        return true;
+    }
+
+    private boolean colisaoHorizontal(GameObject obj, GameObject obj2) {
+        if(obj2.y + obj2.height <= obj.y) {
+            return false;
+        }
+        if(obj.y + obj.height <= obj2.y) {
+            return false;
+        }
+        return true;
     }
 }
