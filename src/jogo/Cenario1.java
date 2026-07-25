@@ -18,6 +18,7 @@ public class Cenario1 {
         cenario.loadFromFile(URL.scenario("Cenario1.txt")); // Carrega o arquivo de cenário
         jogador = new Jogador(640, 350); // Instancia o jogador em tais cooredenadas
         teclado = janela.getKeyboard();
+        Som.play("musica.wav");
         run(); // Loop infinito, o mesmo da classe main
     }
 
