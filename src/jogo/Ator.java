@@ -15,7 +15,7 @@ public class Ator extends Sprite {
     boolean movendo = false;
 
     Controle controle = new Controle();
-    public double vida = 1000;
+    static double vida = 1000;
 
     public Ator(String fileName, int numFrames) {
         super(fileName, numFrames);

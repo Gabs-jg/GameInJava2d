@@ -4,7 +4,7 @@ import jplay.URL;
 
 public class Zumbi extends Ator {
 
-
+    private double ataque = 0.5;
 
     public Zumbi(int x, int y) {
         super(URL.sprite("Zumbi0.png"), 16);
@@ -60,10 +60,20 @@ public class Zumbi extends Ator {
     public void morrer() {
         if(this.vida <= 0) {
             this.velocidade = 0;
-            //this.ataque = 0;
+            this.ataque = 0;
             this.direcao = 0;
             this.movendo = false;
             this.x = 1000000;
+        }
+    }
+
+    public void atacar(Jogador jogador) {
+        if(this.collided(jogador)) {
+            Jogador.vida -= this.ataque;
+        }
+
+        if(Jogador.vida <= 0) {
+            System.exit(0);
         }
     }
 

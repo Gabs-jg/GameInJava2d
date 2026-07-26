@@ -8,7 +8,7 @@ import java.awt.event.KeyEvent;
 
 public class Jogador extends Ator {
 
-
+    static double vida = 10000;
 
     public Jogador(int x, int y) {
         super(URL.sprite("jogador.png"), 20);
@@ -75,6 +75,12 @@ public class Jogador extends Ator {
             update();
             movendo = false;
         }
+    }
+
+    Font f = new Font("arial", Font.BOLD, 30);
+
+    public void vida(Window janela) {
+        janela.drawText("Vida: " + Jogador.vida, 30, 30, Color.GREEN, f);
     }
 
 }
