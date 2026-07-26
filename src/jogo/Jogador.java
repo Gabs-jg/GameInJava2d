@@ -19,11 +19,11 @@ public class Jogador extends Ator {
 
     ControleTiros tiros = new ControleTiros();
 
-    public void atirar(Window janela, Scene cena, Keyboard teclado) {
+    public void atirar(Window janela, Scene cena, Keyboard teclado, Ator inimigo) {
         if(teclado.keyDown(KeyEvent.VK_A)) {
             tiros.adicionaTiro(x + 2, y + 10, direcao, cena);
         }
-        tiros.run();
+        tiros.run(inimigo);
     }
 
     public void controle(Window janela, Keyboard teclado) {

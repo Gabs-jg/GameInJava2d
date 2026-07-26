@@ -11,6 +11,8 @@ public class Main {
         GameImage plano = new GameImage(URL.sprite("menu.png")); // Imagem que usa como menu do jogo
         Keyboard teclado = janela.getKeyboard(); // Instancia um teclado a partir da janela.
 
+        // Criar menu: Criar uma classe com a implementação acima e chamar no loop infinito
+
         while(true) {
             plano.draw(); // Desenha o plano de fundo (menu)
             janela.update(); // Atualiza a janela

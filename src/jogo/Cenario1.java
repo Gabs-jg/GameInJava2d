@@ -5,7 +5,7 @@ import jplay.Scene;
 import jplay.URL;
 import jplay.Window;
 
-public class Cenario1 {
+public class Cenario1 extends Cenario {
 
     private Window janela;
     private Scene cenario; // Isso define o arquivo que molda o cenário. Sempre usar essas classes em classes que formam o cenário
@@ -38,15 +38,26 @@ public class Cenario1 {
             jogador.x += cenario.getXOffset();
             jogador.y += cenario.getYOffset();
 
-            jogador.atirar(janela, cenario, teclado);
-
             zumbi.x += cenario.getXOffset();
             zumbi.y += cenario.getYOffset();
 
             jogador.draw();
             zumbi.draw();
+
+            jogador.atirar(janela, cenario, teclado, zumbi);
+            zumbi.morrer();
+
             janela.update();
+
+            mudarCenario();
 
         }
     }
+
+    private void mudarCenario() {
+        if(tileCollision(4, jogador, cenario)) {
+            new Cenario2(janela);
+        }
+    }
+
 }
